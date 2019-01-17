@@ -29,15 +29,10 @@ public class Connect {
 		int count=0;
 		final String xmlPath = "D:\\Eclipse\\XMlfile.xml";
 		String dbDriver = "com.mysql.cj.jdbc.Driver"; 
-//        String dbURL = "jdbc:mysql://sql12.freemysqlhosting.net/"; 
-//        String dbName = "sql12273536"; 
-//        String dbUsername = "sql12273536"; 
-//        String dbPassword = "accolite"; 
-		String dbURL = "jdbc:mysql:// localhost:3306/"; 
-        // Database name to access 
-        String dbName = "db"; 
-        String dbUsername = "root"; 
-        String dbPassword = "root"; 
+        String dbURL = "jdbc:mysql://sql12.freemysqlhosting.net/"; 
+        String dbName = "sql12273536"; 
+        String dbUsername = "sql12273536"; 
+        String dbPassword = "accolite"; 
         
         
 		try{  
