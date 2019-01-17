@@ -11,12 +11,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -27,6 +29,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 public class Connect2 {
+	int count=0;
 	final String xmlPath = "D:\\Eclipse\\xmlFile1.xml";
 	String dbDriver = "com.mysql.cj.jdbc.Driver"; 
 //    String dbURL = "jdbc:mysql://sql12.freemysqlhosting.net/"; 
@@ -38,7 +41,7 @@ public class Connect2 {
     String dbName = "db"; 
     String dbUsername = "root"; 
     String dbPassword = "root"; 
-	public void con() {
+	public void con() throws ClassNotFoundException {
 		try{  
 			Class.forName(dbDriver); 
 	        Connection con = DriverManager.getConnection(dbURL + dbName, 
@@ -48,8 +51,9 @@ public class Connect2 {
 			Statement stmt=con.createStatement();
 			ResultSet result=null;
 			String sql = "INSERT INTO emp " +
-	                   "VALUES (2, 'Varnita', 'Developer', 500, '2015-11-11',2000000,20,30)";
+	                   "VALUES (16, 'Varnita', 'Developer', 500, '2015-11-11',2000000,20,30)";
 	      	stmt.executeUpdate(sql);
+	      	result=stmt.executeQuery("select * from emp");
 			System.out.println("Inserted records into the table...");
 			// Iterate through the data in the result set and display it. 
 		    DocumentBuilderFactory df = DocumentBuilderFactory.newInstance();
@@ -57,11 +61,12 @@ public class Connect2 {
 			Document doc = db.newDocument();
 			Element company = doc.createElement("company");
 			doc.appendChild(company);
+			
 		    while (result.next()) {
 			Element employee = doc.createElement("employee");
 			company.appendChild(employee);
 			Attr attr = doc.createAttribute("id");
-			attr.setValue("10");
+			attr.setValue("count");
 			employee.setAttributeNode(attr);
 			Element empNo = doc.createElement("empNo");
 			empNo.appendChild(doc.createTextNode(""+result.getInt(1)));
@@ -105,20 +110,24 @@ public class Connect2 {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT,"yes");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			DOMSource domSource = new DOMSource(doc);
 			StreamResult streamResult = new StreamResult(new File(xmlPath));
-			transformer.transform(domSource, streamResult);}
+			transformer.transform(domSource, streamResult);
+			count++;
+		    }
 			System.out.println("Done creating XML File 2 after updating.");
 
-			result.close();
-			con.close();
-		
-		
+		}catch (SQLException sqlExp) {
+			 
+			System.out.println("SQLExcp:" + sqlExp.toString());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch(Exception e){ System.out.println(e);}  
 		
 		
 	}
 
 }
-

@@ -22,30 +22,30 @@ public class CompareClass {
 
 	public static void compare() throws IOException {
 		// TODO Auto-generated method stub
-		final String xmlPath1 = "xmlFile1.xml";
-		final String xmlPath2 = "xmlFile.xml";
+		final String xmlPath1 = "D:\\Eclipse\\xmlFile1.xml";
+		final String xmlPath2 = "D:\\Eclipse\\xmlFile.xml";
 		
-		File file1 = new File(xmlPath1);
-		File file2 = new File(xmlPath2);
-		BufferedReader FirstXML = new BufferedReader(new FileReader(file1));
-		BufferedReader secondXML = new BufferedReader(new FileReader(file2));
-		String line = FirstXML.readLine();
-		String line1 = secondXML.readLine();
+		File xmlfile1 = new File(xmlPath1);
+		File xmlfile2 = new File(xmlPath2);
+		BufferedReader xml1 = new BufferedReader(new FileReader(xmlfile1));
+		BufferedReader xml2 = new BufferedReader(new FileReader(xmlfile2));
+		String st1 = xml1.readLine();
+		String st2 = xml2.readLine();
 	    System.out.println("This Entry is Added New To The DataBase");
-		while(line!=null&&line1!=null)
+		while(st1!=null&&st2!=null)
 		{
-			if(line.equals(line1))
+			if(st1.equals(st2))
 			{
-				line=FirstXML.readLine();
-				line1=secondXML.readLine();
+				st1=xml1.readLine();
+				st2=xml2.readLine();
 			}
 			else
 			{
-				System.out.println(line1);
-				line1=secondXML.readLine();
+				System.out.println(st2);
+				st2=xml2.readLine();
 			}
 		}
-		if(line.equals(line1))
+		if(st1.equals(st2))
 			System.out.println("same");
 		else
 			System.out.println("notsame");
