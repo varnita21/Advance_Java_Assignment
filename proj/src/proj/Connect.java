@@ -30,16 +30,10 @@ public class Connect {
 		int count=0;
 		final String xmlPath = "D:\\Eclipse\\XMlfile.xml";
 		String dbDriver = "com.mysql.cj.jdbc.Driver"; 
-//        String dbURL = "jdbc:mysql://sql12.freemysqlhosting.net/"; 
-//        String dbName = "sql12273536"; 
-//        String dbUsername = "sql12273536"; 
-//        String dbPassword = "accolite"; 
-		String dbURL = "jdbc:mysql:// localhost:3306/"; 
-        // Database name to access 
-        String dbName = "db"; 
-        String dbUsername = "root"; 
-        String dbPassword = "root"; 
-        
+        	String dbURL = "jdbc:mysql://sql12.freemysqlhosting.net/"; 
+        	String dbName = "sql12273536"; 
+        	String dbUsername = "sql12273536"; 
+        	String dbPassword = "accolite"; 
         
 		try{  
 			System.out.println("In try");
@@ -51,15 +45,11 @@ public class Connect {
 			Statement stmt=con.createStatement();  
 			ResultSet result=stmt.executeQuery("show fields from emp");
 	        
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
 			DOMSource domSource = null;
 	 
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.newDocument();
-			Element results = doc.createElement("Table");
-
 			
 		    while (result.next()) {
 			Element employee = doc.createElement("employee");
@@ -71,37 +61,37 @@ public class Connect {
 			empNo.appendChild(doc.createTextNode(""+result.getInt(1)));
 			employee.appendChild(empNo);
 			
-//			//name
+			//name
 			Element ename = doc.createElement("ename");
 			ename.appendChild(doc.createTextNode(result.getString(2)));
 			employee.appendChild(ename);
-//			
-//			//job
+			
+			//job
 			Element job = doc.createElement("job");
 			job.appendChild(doc.createTextNode(result.getString(3)));
 			employee.appendChild(job);
-//			
-//			//D.O.M
+			
+			//D.O.M
 			Element mrg = doc.createElement("mrg");
 			mrg.appendChild(doc.createTextNode(""+result.getInt(4)));
 			employee.appendChild(mrg);
-//			
-//			//hiredate
+			
+			//hiredate
 			Element hiredate = doc.createElement("hiredate");
 			hiredate.appendChild(doc.createTextNode(""+result.getDate(5)));
 			employee.appendChild(hiredate);
-//			
-//			//sal
+			
+			//sal
 			Element sal = doc.createElement("sal");
 			sal.appendChild(doc.createTextNode(""+result.getInt(6)));
 			employee.appendChild(sal);
-//			
-//			//comm
+			
+			//comm
 			Element comm = doc.createElement("comm");
 			sal.appendChild(doc.createTextNode(""+result.getInt(7)));
 			employee.appendChild(comm);
-//			
-//			//deptno
+			
+			//deptno
 			Element deptno = doc.createElement("deptno");
 			deptno.appendChild(doc.createTextNode(""+result.getInt(7)));
 			employee.appendChild(deptno);
@@ -109,7 +99,8 @@ public class Connect {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			StreamResult streamResult = new StreamResult(new File(xmlPath));
-			transformer.transform(domSource, streamResult);}
+			transformer.transform(domSource, streamResult);
+		    }
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			
